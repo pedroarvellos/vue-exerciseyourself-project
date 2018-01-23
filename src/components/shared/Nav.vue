@@ -20,7 +20,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Body Parts <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li v-for="bodyPart of bodyParts" :key="bodyPart.name">
-                <a><router-link :to="{ name: 'listExercises', params: {id: bodyPart.id}}">{{ bodyPart.name }}</router-link></a>
+                <a><router-link :to="{ name: 'exerciseList', params: {id: bodyPart.id}}">{{ bodyPart.name }}</router-link></a>
             </li>
           </ul>
         </li>

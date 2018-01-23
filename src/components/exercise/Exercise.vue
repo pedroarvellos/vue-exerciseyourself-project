@@ -1,29 +1,43 @@
 <template>
-  <div>
-      {{ exercise }}
-  </div>
+    <div class="container">
+        <div class="col-md-8"><h4>Exercise Detail</h4></div>
+        <div class="col-md-2 col-md-offset-2"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+        <div class="col-md-12"><hr></div>
+        <div class="col-md-12">{{ exercise }}</div>
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        
+        
+</div>
+    </div>
 </template>
 
 <script>
-import BodyPartService from "../../services/BodyPartService";
+import ExerciseService from "../../services/ExerciseService";
 
 export default {
   data() {
-    return {
-      id: this.$route.params.id,
-      exercise: "",
-      errorMessage: ""
-    };
+      return {
+        exercise: "",
+        errorMessage: ""
+      }
   },
 
   created() {
-    this.service = new BodyPartService(this.$resource);
+    this.fetchData();
+  },
+  methods: {
+    fetchData() {
+      this.service = new ExerciseService(this.$resource);
 
-    if (this.id) {
-      this.service
-        .readById(this.id)
-        .then(exercise => (this.exercise = exercise));
-        console.log(exercise)
+      if (this.$route.params.id) {
+        this.service
+          .readById(this.$route.params.id)
+          .then(
+            exercise => (this.exercise = exercise),
+            err => (this.errorMessage = err.message)
+          );
+      }
+      console.log(this.exercise);
     }
   }
 };
