@@ -5,8 +5,6 @@
         <div class="col-md-12"><hr></div>
         <div class="col-md-12">{{ exercise }}</div>
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        
-        
 </div>
     </div>
 </template>
