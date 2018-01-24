@@ -1,6 +1,6 @@
 # vue-exerciseyourself-project
 
-Exercise Yourself is an example of a Single Page Application which has as goal help users to register new exercises and define which part of the body expected to affect positively. 
+Exercise Yourself is an example of a Single Page Application which has as goal help users to register new exercises and define which part of the body they're expected to affect positively. 
 
 To developed this project it was used:
 
@@ -11,6 +11,8 @@ To developed this project it was used:
 #### Build Setup
 
 ``` bash
+# check the exercise-yourself-model-and-rest-api project to undestand how to run the api
+
 # install dependencies
 npm install
 
