@@ -11,8 +11,7 @@ To developed this project it was used:
 #### Build Setup
 
 ``` bash
-# check 
-the exercise-yourself-model-and-rest-api project to undestand how to run the api
+# check the exercise-yourself-model-and-rest-api project to undestand how to run the api
 
 # install dependencies
 npm install
