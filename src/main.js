@@ -14,7 +14,6 @@ Vue.use(VueRouter);
 
 Vue.http.options.root = 'http://localhost:8080';
 
-$('.carousel').carousel()
 
 const router = new VueRouter({
   routes: routes,
