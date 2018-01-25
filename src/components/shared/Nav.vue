@@ -20,17 +20,12 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Body Parts <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li v-for="bodyPart of bodyParts" :key="bodyPart.name">
-                <a><router-link :to="{ name: 'exerciseList', params: {id: bodyPart.id}}">{{ bodyPart.name }}</router-link></a>
+                <a><router-link :to="{ name: 'exercise-list', params: {id: bodyPart.id}}">{{ bodyPart.name }}</router-link></a>
             </li>
           </ul>
         </li>
+        <li><a><router-link :to="{ name: 'exercise-add' }">New Exercise</router-link></a></li>
       </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

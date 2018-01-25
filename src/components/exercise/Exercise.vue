@@ -1,11 +1,14 @@
 <template>
     <div class="container">
-        <div class="col-md-8"><h4>Exercise Detail</h4></div>
+        <div class="col-md-8"><h4>Exercise Instructions</h4></div>
         <div class="col-md-2 col-md-offset-2"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
         <div class="col-md-12"><hr></div>
-        <div class="col-md-12">{{ exercise }}</div>
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-</div>
+        <div class="col-md-12">Steps:</div>
+        <div class="col-md-12"></div>
+        <div class="col-md-12"></div>
+        <div class="col-md-12">{{ exercise.description }}</div>
+        <!-- <div class="col-md-12">{{ exercise }}</div> -->
+        
     </div>
 </template>
 

@@ -5,7 +5,7 @@
       <div class="col-md-2 col-md-offset-0"><img src="https://www.greenme.com.br/images/viver/esporte-tempo-livre/natacao.jpg" class="img-responsive img-circle" alt="Responsive image"></div>
       <div class="col-md-6"><h4>{{ exercise.name }}</h4></div>
       <div class="col-md-2 col-md-offset-2">
-        <router-link :to="{ name: 'exercise', params: {id: exercise.id}}"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></router-link>
+        <router-link :to="{ name: 'exercise-view', params: {id: exercise.id}}"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></router-link>
       </div>
       <div class="col-md-10 col-md-offset-2"><hr></div>
     </div>

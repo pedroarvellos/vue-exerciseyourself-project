@@ -8,10 +8,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'jquery/dist/jquery.js';
 import 'bootstrap/dist/js/bootstrap.js' ;
 
+
 Vue.use(VueResource);
 Vue.use(VueRouter);
 
 Vue.http.options.root = 'http://localhost:8080';
+
+$('.carousel').carousel()
 
 const router = new VueRouter({
   routes: routes,
