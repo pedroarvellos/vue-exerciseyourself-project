@@ -17,10 +17,8 @@
                     <label for="Steps">Steps:</label>
                     <textarea class="form-control" rows="6" id="Steps" v-model="exercise.steps"></textarea>
                 </div>
-                <select class="form-control js-example-basic-multiple" v-model="exercise.bodyPart" multiple="multiple" v-basic-select-two>
-                    <option disabled value="">Choose a Body Part</option>
-                    <option v-for="bodyPart of bodyParts" :key="bodyPart.name">{{ bodyPart.name }}</option>
-                </select>
+                <v-select label="name" v-model="exercise.bodyPartList" :options="bodyParts" multiple="multiple" placeholder="Select a Body Part"></v-select>
+                <br/>
                 <div class="form-group">
                     <label for="exampleInputFile">Picture</label>
                     <input type="file" id="exampleInputFile">
@@ -28,11 +26,14 @@
                 <button type="submit" class="btn btn-primary pull-right">Submit</button>
             </form>
         </div>
+
+        <div class="col-md-12">
+            {{ errorMessage }}
+        </div>
     </div>
 </template>
 <script>
-
-import ExerciseEntity from "../../Entity/ExerciseEntity.js";
+import ExerciseEntity from "../../entity/ExerciseEntity.js";
 import ExerciseService from "../../services/ExerciseService";
 import BodyPartService from "../../services/BodyPartService";
 import MultipleSelect from "../../directives/MutipleSelect";
@@ -42,15 +43,20 @@ export default {
   data() {
     return {
       exercise: new ExerciseEntity(),
-      bodyParts: "",
+      bodyParts: [],
       errorMessage: ""
     };
   },
+
   methods: {
-    create() {
-      this.service.create(this.exercise).then();
+    create() { //continuar no método updated
+      this.exerciseService.create(this.exercise)
+      .then(() => {
+        this.$router.push({ name: "home" });
+      }, err => (errorMessage = erro.message));
     }
   },
+
   created() {
     this.bodyPartService = new BodyPartService(this.$resource);
     this.exerciseService = new ExerciseService(this.$resource);
@@ -73,7 +79,7 @@ export default {
   },
 
   directives: {
-      "basic-select-two": MultipleSelect
+    "basic-select-two": MultipleSelect
   }
 };
 </script>

@@ -14,7 +14,31 @@ export default class ExerciseService {
     }
 
     create(exercise) {
-        this._resource
-            .save(exercise);
+
+        if(exercise.id) {
+            return this._resource
+            .update(exercise)
+            .then(res => res.json(), err => {
+                console.log(err);
+                throw new Error('Sorry, it was not possible to obtain the exercise. Try later!');
+            });
+        } else {
+            return this._resource
+            .save(exercise)
+            .then(res => res.json(), err => {
+                console.log(err);
+                throw new Error('Sorry, it was not possible to obtain the exercise. Try later!');
+            });
+        }
+    }
+
+    delete(id) {
+
+        return this._resource
+            .delete({ id })
+            .then(null, err => {
+                console.log(err);
+                throw new Error('Não foi possível remover a foto. Tente mais tarde');
+            });
     }
 }

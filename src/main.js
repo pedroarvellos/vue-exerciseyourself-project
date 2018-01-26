@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
+import vSelect from 'vue-select'
 import { routes } from './routes';
 
 import 'bootstrap/dist/css/bootstrap.css'; 
@@ -11,6 +12,7 @@ import 'bootstrap/dist/js/bootstrap.js' ;
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
+Vue.component('v-select', vSelect)
 
 Vue.http.options.root = 'http://localhost:8080';
 
