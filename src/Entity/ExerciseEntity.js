@@ -1,9 +1,9 @@
 export default class ExerciseEntity {
 
-    constructor(name='', steps='', bodyPartList='', desciption='', photo='') {
+    constructor(name='', instructions='', bodyPartList='', desciption='', photo='') {
 
         this.name = name;
-        this.steps = steps;
+        this.instructions = instructions;
         this.bodyPartList = bodyPartList;
         this.desciption = desciption;
         this.photo = photo;

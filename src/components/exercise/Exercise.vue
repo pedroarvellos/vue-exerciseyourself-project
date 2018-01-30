@@ -1,13 +1,11 @@
 <template>
     <div class="container">
-        <div class="col-md-8"><h4>Exercise Instructions</h4></div>
-        <div class="col-md-2 col-md-offset-2"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
+        <div class="col-md-8"><h4>{{ exercise.name }}</h4></div>
         <div class="col-md-12"><hr></div>
         <div class="col-md-12">Description:</div>
         <div class="col-md-12">{{ exercise.description }}</div>
-        
         <div class="col-md-12">Steps:</div>
-        <div class="col-md-12">{{ exercise.steps }}</div>
+        <div class="col-md-12">{{ exercise.instructions }}</div>
     </div>
 </template>
 

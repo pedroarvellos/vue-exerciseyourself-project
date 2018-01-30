@@ -9,18 +9,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">ExerciseYourself</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a><router-link :to="{ name: 'home' }">Exercices</router-link></a></li>
+        <li><a><router-link :to="{ name: 'home' }">Articles</router-link></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Body Parts <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li v-for="bodyPart of bodyParts" :key="bodyPart.name">
-                <a><router-link :to="{ name: 'exercise-list', params: {id: bodyPart.id}}">{{ bodyPart.name }}</router-link></a>
+                <a><router-link :to="{ name: 'exercise-list', params: {idBodyPart: bodyPart.id}}">{{ bodyPart.name }}</router-link></a>
             </li>
           </ul>
         </li>
@@ -47,6 +47,5 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
 </style>

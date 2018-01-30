@@ -18,16 +18,16 @@ export default class ExerciseService {
         if(exercise.id) {
             return this._resource
             .update(exercise)
-            .then(res => res.json(), err => {
+            .then(null, err => {
                 console.log(err);
-                throw new Error('Sorry, it was not possible to obtain the exercise. Try later!');
+                throw new Error('Sorry, it was not possible to update the exercise. Try later!');
             });
         } else {
             return this._resource
             .save(exercise)
             .then(res => res.json(), err => {
                 console.log(err);
-                throw new Error('Sorry, it was not possible to obtain the exercise. Try later!');
+                throw new Error('Sorry, it was not possible to create the exercise. Try later!');
             });
         }
     }

@@ -1,14 +1,16 @@
 <template>
-  <div class="container">
+  <div>
     <nav-bar v-bind:bodyParts = "bodyParts"/>
-    <router-view></router-view>
+    <div class="container">
+      <router-view></router-view>
+    </div> 
   </div>
 </template>
 
 <script>
 import Nav from "./components/shared/Nav.vue";
 import BodyPartService from "./services/BodyPartService.js";
-import { routes } from './routes';
+import { routes } from "./routes";
 
 export default {
   components: {
@@ -36,5 +38,4 @@ export default {
 </script>
 
 <style>
-
 </style>

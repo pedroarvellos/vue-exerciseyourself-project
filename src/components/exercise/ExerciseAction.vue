@@ -14,8 +14,8 @@
                     <textarea class="form-control" rows="6" id="Description" v-model="exercise.description"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="Steps">Steps:</label>
-                    <textarea class="form-control" rows="6" id="Steps" v-model="exercise.steps"></textarea>
+                    <label for="instructions">instructions:</label>
+                    <textarea class="form-control" rows="6" id="instructions" v-model="exercise.instructions"></textarea>
                 </div>
                 <v-select label="name" v-model="exercise.bodyPartList" :options="bodyParts" multiple="multiple" placeholder="Select a Body Part"></v-select>
                 <br/>
@@ -27,9 +27,7 @@
             </form>
         </div>
 
-        <div class="col-md-12">
-            {{ errorMessage }}
-        </div>
+        {{ errorMessage }}
     </div>
 </template>
 <script>
@@ -39,47 +37,55 @@ import BodyPartService from "../../services/BodyPartService";
 import MultipleSelect from "../../directives/MutipleSelect";
 
 export default {
-  components: {},
   data() {
     return {
       exercise: new ExerciseEntity(),
       bodyParts: [],
-      errorMessage: ""
+      errorMessage: "",
+      idBodyPart: this.$route.params.idBodyPart,
+      idExercise: this.$route.params.idExercise
     };
   },
 
-  methods: {
-    create() { //continuar no método updated
-      this.exerciseService.create(this.exercise)
-      .then(() => {
-        this.$router.push({ name: "home" });
-      }, err => (errorMessage = erro.message));
-    }
-  },
-
   created() {
-    this.bodyPartService = new BodyPartService(this.$resource);
-    this.exerciseService = new ExerciseService(this.$resource);
-
-    if (this.$route.params.id) {
-      this.exerciseService
-        .readById(this.$route.params.id)
-        .then(
-          exercise => (this.exercise = exercise),
-          err => (this.errorMessage = err.message)
-        );
-    }
-
-    this.bodyPartService
-      .readByCriteria()
-      .then(
-        bodyParts => (this.bodyParts = bodyParts),
-        err => errorMessage.message
-      );
+    this.fetchData();
   },
 
-  directives: {
-    "basic-select-two": MultipleSelect
+  watch: {
+    $route: "fetchData"
+  },
+
+  methods: {
+    create() {
+      this.exerciseService.create(this.exercise).then(() => {
+        if (this.idExercise)
+          this.$router.push({
+            name: "exercise-list",
+            params: { idBodyPart: this.idBodyPart, idExercise: this.idExercise }
+          });
+      }, err => (this.errorMessage = err.message));
+    },
+
+    fetchData() {
+      this.bodyPartService = new BodyPartService(this.$resource);
+      this.exerciseService = new ExerciseService(this.$resource);
+
+      this.exercise = new ExerciseEntity();
+
+      if (this.$route.params.idExercise) {
+        this.exerciseService.readById(this.$route.params.idExercise)
+        .then(exercise => {
+          this.exercise = exercise;
+        }, err => (this.errorMessage = err.message));
+      }
+
+      this.bodyPartService
+        .readByCriteria()
+        .then(
+          bodyParts => (this.bodyParts = bodyParts),
+          err => errorMessage.message
+        );
+    },
   }
 };
 </script>
