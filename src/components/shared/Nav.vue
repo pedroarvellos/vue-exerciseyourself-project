@@ -9,13 +9,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">ExerciseYourself</a>
+      <router-link :to="{ name: 'home' }"><a class="navbar-brand">ExerciseYourself</a></router-link>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a><router-link :to="{ name: 'home' }">Articles</router-link></a></li>
+        <li><router-link :to="{ name: 'home' }"><a>Articles</a></router-link></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Body Parts <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -24,15 +24,15 @@
             </li>
           </ul>
         </li>
-        <li><a><router-link :to="{ name: 'exercise-add' }">New Exercise</router-link></a></li>
+        <li><router-link :to="{ name: 'exercise-add' }"><a>New Exercise</a></router-link></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Profile</a></li>
+            <li><a href="https://www.linkedin.com/in/pedroarvellos/" target="_blank">Linkedin</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="https://github.com/pedroarvellos" target="_blank">GitHub</a></li>
           </ul>
         </li>
       </ul>

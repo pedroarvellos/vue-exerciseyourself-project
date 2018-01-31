@@ -6,35 +6,35 @@
         <div class="col-md-12">
             <form @submit.prevent="create()">
                 <div class="form-group">
-                    <label for="Name">Name:</label>
-                    <input type="text" class="form-control" id="Name" v-model="exercise.name">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" v-model="exercise.name" v-validate data-vv-rules="required|min:3|max:40">
+                    <span class="error" v-show="errors.has('name')">{{ errors.first('name') }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="Description">Description:</label>
-                    <textarea class="form-control" rows="6" id="Description" v-model="exercise.description"></textarea>
+                    <label for="description">Description:</label>
+                    <textarea class="form-control" rows="6" id="description" name="description" v-model="exercise.description" v-validate data-vv-rules="required"></textarea>
+                    <span class="error" v-show="errors.has('description')">{{ errors.first('description') }}</span>
                 </div>
                 <div class="form-group">
                     <label for="instructions">instructions:</label>
-                    <textarea class="form-control" rows="6" id="instructions" v-model="exercise.instructions"></textarea>
+                    <textarea class="form-control" rows="6" id="instructions" name="instructions" v-model="exercise.instructions" v-validate data-vv-rules="required"></textarea>
+                    <span class="error" v-show="errors.has('instructions')">{{ errors.first('instructions') }}</span>
                 </div>
-                <v-select label="name" v-model="exercise.bodyPartList" :options="bodyParts" multiple="multiple" placeholder="Select a Body Part"></v-select>
+                <v-select label="name" v-model="exercise.bodyPartList" :options="bodyParts" multiple="multiple" placeholder="Select a Body Part" name="bodypart"></v-select>
                 <br/>
-                <div class="form-group">
-                    <label for="exampleInputFile">Picture</label>
-                    <input type="file" id="exampleInputFile">
-                </div>
+                <label>Photo:</label>
+                <image-upload class="" :exercise = "exercise"/>
+
                 <button type="submit" class="btn btn-primary pull-right">Submit</button>
             </form>
         </div>
-
-        {{ errorMessage }}
     </div>
 </template>
 <script>
 import ExerciseEntity from "../../entity/ExerciseEntity.js";
 import ExerciseService from "../../services/ExerciseService";
 import BodyPartService from "../../services/BodyPartService";
-import MultipleSelect from "../../directives/MutipleSelect";
+import ImageUpload from "../shared/ImageUpload.vue";
 
 export default {
   data() {
@@ -47,6 +47,10 @@ export default {
     };
   },
 
+  components: {
+    "image-upload": ImageUpload
+  },
+
   created() {
     this.fetchData();
   },
@@ -57,13 +61,27 @@ export default {
 
   methods: {
     create() {
-      this.exerciseService.create(this.exercise).then(() => {
-        if (this.idExercise)
-          this.$router.push({
-            name: "exercise-list",
-            params: { idBodyPart: this.idBodyPart, idExercise: this.idExercise }
-          });
-      }, err => (this.errorMessage = err.message));
+      this.$validator.validateAll()
+      .then(success => {
+        if (success) {
+          this.exerciseService
+          .create(this.exercise)
+          .then(() => {
+            if (this.idBodyPart) {
+              this.$router
+              .push({
+                name: "exercise-list",
+                params: { idBodyPart: this.idBodyPart }
+              });
+            } else {
+              this.$router
+              .push({
+                name: "home"
+              });
+            }
+          }, err => (this.errorMessage = err.message));
+        }
+      });
     },
 
     fetchData() {
@@ -73,10 +91,11 @@ export default {
       this.exercise = new ExerciseEntity();
 
       if (this.$route.params.idExercise) {
-        this.exerciseService.readById(this.$route.params.idExercise)
-        .then(exercise => {
-          this.exercise = exercise;
-        }, err => (this.errorMessage = err.message));
+        this.exerciseService
+          .readById(this.$route.params.idExercise)
+          .then(exercise => {
+            this.exercise = exercise;
+          }, err => (this.errorMessage = err.message));
       }
 
       this.bodyPartService
@@ -85,10 +104,12 @@ export default {
           bodyParts => (this.bodyParts = bodyParts),
           err => errorMessage.message
         );
-    },
+    }
   }
 };
 </script>
 <style scoped>
-
+.error {
+  color: red;
+}
 </style>

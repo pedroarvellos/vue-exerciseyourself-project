@@ -1,9 +1,12 @@
 <template>
   <div class="container">
     <h1 v-if="errorMessage">{{ errorMessage }}</h1>
-    <h1 v-if="exerciseList < 1">No exercises registered!</h1>
+    <div v-if="exerciseList < 1" class="alert alert-info" role="alert">No exercises registered!</div>
     <div  v-for="exercise of exerciseList" :key="exercise.id">
-      <div class="col-md-2"><img src="../../assets/chest_dip.jpg" class="img-thumbnail" alt="Responsive image"></div>
+      <div class="col-md-2">
+        <img v-if="exercise.photo" :src="exercise.photo" class="img-thumbnail" alt="Responsive image">
+        <img v-if="!exercise.photo" src="../../assets/no-photo.png" class="img-thumbnail" alt="Responsive image">
+      </div>
       <div class="col-md-3"><h4>{{ exercise.name }}</h4></div>
       <div class="col-md-3 col-md-offset-4">
         <router-link :to="{ name: 'exercise-view', params: {id: exercise.id}}"><button  type="button" class="btn btn-default">View</button></router-link>

@@ -1,11 +1,17 @@
 <template>
     <div class="container">
-        <div class="col-md-8"><h4>{{ exercise.name }}</h4></div>
+        <div class="col-md-12"><h4>{{ exercise.name }}</h4></div>
+        <br/>
+        <div class="col-md-4">
+          <img v-if="exercise.photo" :src="exercise.photo" class="img-thumbnail" alt="Responsive image">
+          <img v-if="!exercise.photo" src="../../assets/no-photo.png" class="img-thumbnail" alt="Responsive image">
+        </div>
         <div class="col-md-12"><hr></div>
-        <div class="col-md-12">Description:</div>
+        <label class="col-md-12">Description:</label>
         <div class="col-md-12">{{ exercise.description }}</div>
-        <div class="col-md-12">Steps:</div>
-        <div class="col-md-12">{{ exercise.instructions }}</div>
+        <div class="col-md-12"><hr></div>
+        <label class="col-md-12">Steps:</label>
+        <textarea class="form-control" rows="6" id="description" name="description" :value="exercise.instructions" readonly></textarea>
     </div>
 </template>
 
