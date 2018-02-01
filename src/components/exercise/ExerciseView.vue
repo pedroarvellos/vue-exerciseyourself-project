@@ -1,5 +1,11 @@
 <template>
     <div class="container">
+        <ol class="breadcrumb">
+          <li><router-link :to="{ name: 'home' }"><a>Home</a></router-link></li>
+          <li><router-link :to="{ name: 'exercise-list', params: {idBodyPart: idBodyPart} }"><a>Body Part</a></router-link></li>
+          <li class="active">New Exercise</li>
+        </ol>
+
         <div class="col-md-12"><h4>{{ exercise.name }}</h4></div>
         <br/>
         <div class="col-md-4">
@@ -22,7 +28,8 @@ export default {
   data() {
     return {
       exercise: "",
-      errorMessage: ""
+      errorMessage: "",
+      idBodyPart: this.$route.params.idBodyPart
     };
   },
 
@@ -30,6 +37,7 @@ export default {
     this.service = new ExerciseService(this.$resource);
     this.fetchData();
   },
+
   methods: {
     fetchData() {
       if (this.$route.params.id) {
@@ -40,7 +48,6 @@ export default {
             err => (this.errorMessage = err.message)
           );
       }
-      console.log(this.exercise);
     }
   }
 };

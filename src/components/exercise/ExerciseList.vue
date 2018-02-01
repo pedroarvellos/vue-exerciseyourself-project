@@ -1,5 +1,9 @@
 <template>
   <div class="container">
+    <ol class="breadcrumb">
+      <li><router-link :to="{ name: 'home' }"><a>Home</a></router-link></li>
+      <li class="active">Body Parts</li>
+    </ol>
     <h1 v-if="errorMessage">{{ errorMessage }}</h1>
     <div v-if="exerciseList < 1" class="alert alert-info" role="alert">No exercises registered!</div>
     <div  v-for="exercise of exerciseList" :key="exercise.id">
@@ -65,4 +69,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

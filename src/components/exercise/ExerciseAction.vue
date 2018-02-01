@@ -1,10 +1,21 @@
 <template>
     <div>
+        <ol v-if="!idBodyPart" class="breadcrumb">
+          <li><router-link :to="{ name: 'home' }"><a>Home</a></router-link></li>
+          <li class="active">New Exercise</li>
+        </ol>
+
+        <ol v-if="idBodyPart" class="breadcrumb">
+          <li><router-link :to="{ name: 'home' }"><a>Home</a></router-link></li>
+          <li><router-link :to="{ name: 'exercise-list', params: {idBodyPart: idBodyPart} }"><a>Body Part</a></router-link></li>
+          <li class="active">New Exercise</li>
+        </ol>
+
         <div class="col-md-8"><h4>New Exercise</h4></div>
         <div class="col-md-12"><hr></div>
 
         <div class="col-md-12">
-            <form @submit.prevent="create()">
+            <form @submit.prevent="insertData()">
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" class="form-control" id="name" name="name" v-model="exercise.name" v-validate data-vv-rules="required|min:3|max:40">
@@ -60,7 +71,7 @@ export default {
   },
 
   methods: {
-    create() {
+    insertData() {
       this.$validator.validateAll()
       .then(success => {
         if (success) {

@@ -15,7 +15,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><router-link :to="{ name: 'home' }"><a>Articles</a></router-link></li>
+        <li><router-link :to="{ name: 'home' }"><a>Home</a></router-link></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Body Parts <span class="caret"></span></a>
           <ul class="dropdown-menu">
